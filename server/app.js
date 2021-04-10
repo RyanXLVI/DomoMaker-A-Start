@@ -36,7 +36,7 @@ let redisURL = {
 let redisPASS = 'c6HUBnxIuzVypDpgvDbCKd6MffTzQrZU';
 if(process.env.REDISCLOUD_URL) {
   redisURL = url.parse(process.env.REDISCLOUD_URL);
-  [, redisPass] = redisURL.auth.split(':');
+  [, redisPASS] = redisURL.auth.split(':');
 }
 let redisClient = redis.createClient({
   host: redisURL.hostname,
