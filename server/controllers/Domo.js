@@ -1,10 +1,10 @@
 const models = require('../models');
 
-const Domo = models.Domo;
+const { Domo } = models;
 
 const makerPage = (req, res) => {
   Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
-    if(err) {
+    if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred' });
     }
@@ -14,7 +14,7 @@ const makerPage = (req, res) => {
 };
 
 const makeDomo = (req, res) => {
-  if(!req.body.name || !req.body.age){
+  if (!req.body.name || !req.body.age) {
     return res.status(400).json({ error: 'RAWR! Both name and aage are required' });
   }
 
@@ -32,7 +32,7 @@ const makeDomo = (req, res) => {
 
   domoPromise.catch((err) => {
     console.log(err);
-    if(err.code === 11000){
+    if (err.code === 11000) {
       return res.status(400).json({ error: 'Domo already exists.' });
     }
 
@@ -40,7 +40,7 @@ const makeDomo = (req, res) => {
   });
 
   return domoPromise;
-}
+};
 
 module.exports.makerPage = makerPage;
 module.exports.make = makeDomo;
